@@ -1,19 +1,58 @@
 require 'spec_helper'
 
-	RSpec.configure do |config|
-	  config.include Rails.application.routes.url_helpers
+
+RSpec.configure do |config|
+  config.include Rails.application.routes.url_helpers
+end
+
+describe "User Pages > " do
+
+	subject { page } 
+
+ 	let(:submit) { "Create my account" }
+
+    describe "with invalid information => " do
+      before { visit signup_path }
+      it "should not create a user" do
+        expect { click_button submit }.not_to change(User, :count)
+      end
+      describe "should display error messages => " do
+      	it { click_button submit
+      		 should have_content("Name can't be blank")
+      		 should have_content("Email can't be blank")
+      		 should have_content("Email is invalid") 
+      		 should have_content("Password can't be blank")
+      		 should have_content("Password is too short (minimum is 6 characters)") }
+      end
+    end
+
+    describe "with valid information" do
+      before do
+      	visit signup_path
+        fill_in "Name",         with: "Example User"
+        fill_in "Email",        with: "user@example.com"
+        fill_in "Password",     with: "foobar"
+        fill_in "Confirmation", with: "foobar"
+      end
+
+      it "should create a user" do
+        expect { click_button submit }.to change(User, :count).by(1)
+      end
+      it "should go to profile page" do
+      	click_button submit
+      	should have_title("Example User")
+  	  end
+    end
+
+	describe "Profile Page" do
+		let(:user) { FactoryGirl.create(:user) }
+  		before { visit user_path(user)}
+
+  		it {should have_content(user.name)}
+  		it {should have_title(user.name)}
 	end
 
-	describe "User Pages > " do
 
-		subject { page } 
-
-		describe "Signup Page > " do
-			before { visit signup_path}
-
-			it { should have_content("Sign Up")}
-			it { should have_title(full_title("Sign Up"))}
-		end
 end
 
 # describe "UserPages" do
