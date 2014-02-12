@@ -1,21 +1,21 @@
-require 'spec_helper'
+# require 'spec_helper'
 
-describe "Static Pages > " do
-	subject { page }
+# describe "Static Pages > " do
+# 	subject { page }
 
-	describe "Pages > " do
-		before { 	params = { home: { content: "Sample App", page_title: "", path: '/static_pages/home'},
-		  					   help: { content: "Help", page_title: "Help", path: '/static_pages/help'}
-						     }
-					@pages = Hash.new ( params.keys )
-			   }
-		for current_page in 0...@pages.length
-			it { visit params[pages[current_page]][:path] }
-			it { should have_selector('h3', text: params[pages[current_page]][:content]) }
-		end
+# 	describe "Pages > " do
+# 		before { 	params = { home: { content: "Sample App", page_title: "", path: '/static_pages/home'},
+# 		  					   help: { content: "Help", page_title: "Help", path: '/static_pages/help'}
+# 						     }
+# 					@pages = Hash.new ( params.keys )
+# 			   }
+# 		for current_page in 0...@pages.length
+# 			it { visit params[pages[current_page]][:path] }
+# 			it { should have_selector('h3', text: params[pages[current_page]][:content]) }
+# 		end
 
-	end
-end
+# 	end
+# end
 
 	# describe "Page Content => " do
 	# 		{ home:    "Sample App", 

@@ -10,6 +10,9 @@ require 'spec_helper'
 #     end
 #   end
 # end
-describe UsersHelper do
-  pending "add some examples to (or delete) #{__FILE__}"
-end
+# describe UsersHelper do
+#   pending "add some examples to (or delete) #{__FILE__}"
+# end
+
+
+# Commented to avoid pending status!!
